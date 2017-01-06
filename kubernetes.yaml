@@ -1,0 +1,84 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-a
+  labels:
+    app: redis
+spec:
+  ports:
+  - port: 8080
+  selector:
+    app: service-a
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: service-a
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-a
+    spec:
+      containers:
+        - name: service-a
+          image: robinjmurphy/kubernetes-example-service-a:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-b
+  labels:
+    app: redis
+spec:
+  ports:
+  - port: 8080
+  selector:
+    app: service-b
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: service-b
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-b
+    spec:
+      containers:
+        - name: service-b
+          image: robinjmurphy/kubernetes-example-service-b:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-c
+  labels:
+    app: redis
+spec:
+  ports:
+  - port: 8080
+  selector:
+    app: service-c
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: service-c
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-c
+    spec:
+      containers:
+        - name: service-c
+          image: robinjmurphy/kubernetes-example-service-c:latest
