@@ -4,6 +4,14 @@
 
 _This is currently a work in progress 🚧_
 
+This project contains three simple Go HTTP services:
+
+* [`service-a`](service-a)
+* [`service-b`](service-b)
+* [`service-c`](service-c)
+
+It demonstrates how to build minimal (_~5MB_) Docker images for each of them and deploy them to a local [Kubernetes](http://kubernetes.io/) cluster.
+
 ## Requirements
 
 * [Docker](https://docs.docker.com/engine/installation/mac/)
