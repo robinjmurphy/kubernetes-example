@@ -79,6 +79,20 @@ minikube service service-b
 minikube service service-c
 ```
 
+You can also use the `--url` flag to return the URL of each service for use on the command line:
+
+```bash
+minikube service service-a --url
+# http://192.168.99.100:32363
+curl $(minikube service service-a --url)
+# HTTP/1.1 200 OK
+# Date: Fri, 06 Jan 2017 16:44:24 GMT
+# Content-Length: 25
+# Content-Type: text/plain; charset=utf-8
+#
+# Hello from Service A 👋
+```
+
 ### Updating a deployment
 
 We can update a deployment to run on more [replica](http://kubernetes.io/docs/user-guide/replicasets/) pods.
