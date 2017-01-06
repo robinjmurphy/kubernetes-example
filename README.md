@@ -14,13 +14,13 @@ _This is currently a work in progress 🚧_
 
 #### Building the service images
 
-_This step is optional. You can use the pre-built images in the Docker Hub repositories_
+> _This step is optional. You can use the pre-built images in the Docker Hub repositories_
 
 ```
 make build
 ```
 
-This creates minimal Go images for the three services.
+This creates [minimal](https://blog.codeship.com/building-minimal-docker-containers-for-go-applications/) Go images for the three services.
 
 To push the images to Docker Hub:
 
