@@ -91,7 +91,7 @@ We can then apply this change to the cluster:
 kubectl apply -f kubernetes.yaml
 ```
 
-And check that three pods are running or in the process of spinning up:
+And check that three `service-a` pods are running or in the process of spinning up:
 
 ```bash
 kubectl get pods
