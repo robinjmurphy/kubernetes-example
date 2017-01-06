@@ -40,7 +40,7 @@ kubectl apply -f kubernetes.yaml
 
 You can then list the services that have been created:
 
-```
+```bash
 kubectl get services
 # NAME         CLUSTER-IP   EXTERNAL-IP   PORT(S)          AGE
 # kubernetes   10.0.0.1     <none>        443/TCP          4d
@@ -51,7 +51,7 @@ kubectl get services
 
 And the deployments:
 
-```
+```bash
 kubectl get deployments
 # NAME        DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 # service-a   1         1         1            1           21s
@@ -61,7 +61,7 @@ kubectl get deployments
 
 And the individual [pods](http://kubernetes.io/docs/user-guide/pods/):
 
-```
+```bash
 kubectl get pods
 # NAME                         READY     STATUS    RESTARTS   AGE
 # service-a-1760996314-dc0v7   1/1       Running   0          52s
@@ -73,7 +73,7 @@ Because each deployment is assigned a service with a `NodePort` type, you can ac
 
 Use the `minikube service` command to open each service in your browser:
 
-```
+```bash
 minikube service service-a
 minikube service service-b
 minikube service service-c
@@ -87,13 +87,13 @@ Update the `replicas` property for the `service-a` deployment defined in `kubern
 
 We can then apply this change to the cluster:
 
-```
+```bash
 kubectl apply -f kubernetes.yaml
 ```
 
 And check that three pods are running or in the process of spinning up:
 
-```
+```bash
 kubectl get pods
 # NAME                         READY     STATUS              RESTARTS   AGE
 # service-a-1760996314-1vll6   0/1       ContainerCreating   0          4s
