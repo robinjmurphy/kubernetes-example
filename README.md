@@ -4,14 +4,7 @@
 
 _This is currently a work in progress. I'm using it to help me learn more about Kubernetes and Docker 🚧_
 
-This project contains three simple Go HTTP services:
-
-* [`service-a`](service-a)
-* [`service-b`](service-b)
-* [`service-c`](service-c)
-
-It demonstrates how to build minimal (_~5MB_) Docker images for each of them and deploy them to a local [Kubernetes](http://kubernetes.io/) cluster.
-
+* [Overview](#overview)
 * [Requirements](#requirements)
 * [Setup](#setup)
   * [Building the service images](#building-the-service-images)
@@ -20,6 +13,16 @@ It demonstrates how to build minimal (_~5MB_) Docker images for each of them and
   * [Scaling a service](#scaling-a-service)
   * [Deploying a new version of a service](#deploying-a-new-version-of-a-service)
 * [Reading list](#reading-list)
+
+## Overview
+
+This project contains three simple Go HTTP services:
+
+* [`service-a`](service-a)
+* [`service-b`](service-b)
+* [`service-c`](service-c)
+
+It demonstrates how to build minimal (_~5MB_) Docker images for each of them and deploy them to a local [Kubernetes](http://kubernetes.io/) cluster.
 
 ## Requirements
 
