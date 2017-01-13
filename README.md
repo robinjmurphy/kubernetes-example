@@ -103,16 +103,16 @@ curl -i $(minikube service service-a --url)
 
 ## Making changes
 
-When making changes to our deployed services we'll be following a consistent process:
+When making changes to our deployed services we'll always be following the same process:
 
-1. Make changes to the `kubernetes.yaml` confiuguration file
+1. Make changes to the [`kubernetes.yaml`](kubernetes.yaml) confiuguration file
 2. Apply the changes to the cluster using [`kubectl apply`](http://kubernetes.io/docs/user-guide/kubectl/kubectl_apply/)
 
-Working in this way means we always have an accurate description of the cluster that can be checked in to version control for each rollbacks or even replicating new environments.
+Working in this way means that we'll always have an accurate description of the cluster in the `kubernetes.yaml` file that can be checked in to version control. This makes it easy for us roll back to a previous configuration or even completely recreate the cluster if we need to.
 
 ### Scaling a service
 
-We can scale a deployment to run on more [replica](http://kubernetes.io/docs/user-guide/replicasets/) pods.
+Each of the three services is currently configured to run in a single pod, but we can scale them to run on more [replica](http://kubernetes.io/docs/user-guide/replicasets/) pods.
 
 Update the `replicas` property for the `service-a` deployment defined in `kubernetes.yaml` to be `3`.
 
@@ -133,7 +133,7 @@ We can then apply this change to the cluster:
 kubectl apply -f kubernetes.yaml
 ```
 
-And check that three `service-a` pods are running or in the process of spinning up:
+And check that three `service-a` pods are now running or in the process of spinning up:
 
 ```bash
 kubectl get pods
