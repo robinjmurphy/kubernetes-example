@@ -108,11 +108,11 @@ When making changes to our deployed services we'll always be following the same 
 1. Make changes to the [`kubernetes.yaml`](kubernetes.yaml) confiuguration file
 2. Apply the changes to the cluster using [`kubectl apply`](http://kubernetes.io/docs/user-guide/kubectl/kubectl_apply/)
 
-Working in this way means that we'll always have an accurate description of the cluster in the `kubernetes.yaml` file that can be checked in to version control. This makes it easy for us roll back to a previous configuration or even completely recreate the cluster if we need to.
+Working in this way means that we'll always have an accurate description of the cluster in the `kubernetes.yaml` file that can be checked into version control. This makes it easy for us rollback to a previous configuration or even completely recreate the cluster if we need to.
 
 ### Scaling a service
 
-Each of the three services is currently configured to run in a single pod, but we can scale them to run on more [replica](http://kubernetes.io/docs/user-guide/replicasets/) pods.
+Each of the three services is currently configured to run in a single pod, but we can scale them to run on more using  [replicas](http://kubernetes.io/docs/user-guide/replicasets/).
 
 Update the `replicas` property for the `service-a` deployment defined in `kubernetes.yaml` to be `3`.
 
@@ -153,9 +153,11 @@ So far we've only used the `latest` tag when deploying the three services. This 
 
 _Source: [Best Practices for Configuration](http://kubernetes.io/docs/user-guide/config-best-practices/)_
 
-Let's update our deployments to use versioned images. Update the `image` field for each deployment in [`kubernetes.yaml`](kubernetes.yaml) to use the `v1.0.0` tag:
+Let's update our deployments to use versioned images.
 
-```
+Update the `image` field for each deployment in [`kubernetes.yaml`](kubernetes.yaml) to use the `v1.0.0` tag:
+
+```yaml
 # ...
 image: robinjmurphy/kubernetes-example-service-a:v1.0.0
 # ...
@@ -185,16 +187,16 @@ In the output you should see the line:
 Image: robinjmurphy/kubernetes-example-service-a:v1.0.0
 ```
 
-Calling the service should return the `v1.0.0` response:
+Calling the service should return the version `1.0.0` response:
 
 ```bash
 curl $(minikube service service-a --url)
 # Hello from Service A (Version 1.0.0) 👋
 ```
 
-Now that version `1.0.0` of each service is deployed, let's deploy a new version a new version of `service-a`. This is as simple as updating the image tags in the configuration file to point to a new version (`2.0.0`) and running `kubectl apply`.
+Now that version `1.0.0` of each service is deployed, let's deploy a new version of `service-a`. This is as simple as updating the image tag in the configuration file to point to a new version (`2.0.0`) and running `kubectl apply`.
 
-Let's first update the image in [kubernetes.yaml](kubernetes.yaml):
+Let's first update the `image` field in [kubernetes.yaml](kubernetes.yaml):
 
 ```
 # ...
