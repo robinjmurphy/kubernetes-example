@@ -10,7 +10,7 @@ const emoji string = "👋"
 const version string = "2.0.0"
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello from %s (Version %s) %s", service, version, emoji)
+	fmt.Fprintf(w, "Hello from %s (Version %s) %s\n", service, version, emoji)
 }
 
 func main() {
