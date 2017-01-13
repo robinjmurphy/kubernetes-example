@@ -385,6 +385,7 @@ This will open the dashboard in a browser window. Here you'll see all of the ser
 * [Static Go binaries with Docker on OSX](https://developer.atlassian.com/blog/2015/07/osx-static-golang-binaries-with-docker/)
 * [Building Minimal Docker Containers for Go Applications](https://blog.codeship.com/building-minimal-docker-containers-for-go-applications/)
 * [Five Months of Kubernetes](http://danielmartins.ninja/posts/five-months-of-kubernetes.html)
+* [Graceful shutdown of pods with Kubernetes](https://pracucci.com/graceful-shutdown-of-kubernetes-pods.html)
 
 _Kubernetes documentation_
 
