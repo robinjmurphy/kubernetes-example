@@ -271,7 +271,7 @@ image: robinjmurphy/kubernetes-example-service-b:v2.0.0
 # ...
 ```
 
-Let's apply the change to the cluster and watch what happens the `load.sh` script that's running in a separate tab.
+Let's apply the change to the cluster and watch what happens to the `load.sh` script that's running in a separate tab.
 
 ```
 kubectl apply -f kubernetes.yaml
