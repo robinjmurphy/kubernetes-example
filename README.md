@@ -2,7 +2,19 @@
 
 > An example of using [Kubernetes](http://kubernetes.io/) to run multiple containerized services
 
-_This is currently a work in progress 🚧_
+_This is currently a work in progress. I'm using it to help me learn more about Kubernetes and Docker 🚧_
+
+* [Overview](#overview)
+* [Requirements](#requirements)
+* [Setup](#setup)
+  * [Building the service images](#building-the-service-images)
+  * [Creating the services and deployments](#creating-the-services-and-deployments)
+* [Making changes](#making-changes)
+  * [Scaling a service](#scaling-a-service)
+  * [Deploying a new version of a service](#deploying-a-new-version-of-a-service)
+* [Reading list](#reading-list)
+
+## Overview
 
 This project contains three simple Go HTTP services:
 
