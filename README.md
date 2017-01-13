@@ -247,7 +247,7 @@ curl $(minikube service service-a --url)
 
 ### Zero-downtime deployments
 
-One of the key features of Kubernetes is its ability to perform [rolling updates](https://kubernetes.io/docs/user-guide/rolling-updates/). This means a new version of a service can be deployed into production without any downtime.
+One of the key features of Kubernetes is its ability to perform [rolling updates](https://kubernetes.io/docs/user-guide/rolling-updates/). This means a new version of a service can be deployed into production without downtime.
 
 In the last example we deployed a new version of service by updating its image. However, when the service is only running on a single pod there will be some downtime while the image is updated and the container is replaced.
 
