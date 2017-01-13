@@ -341,7 +341,7 @@ Hello from Service B (Version 2.0.0) 👊
 Hello from Service B (Version 2.0.0) 👊
 ```
 
-This time the deployment went smoothly. We experience zero downtime because Kubernetes updated the pods one at a time, keeping one in service whilst the other was updating.
+This time the deployment went smoothly. We experienced zero downtime because Kubernetes updated the pods one at a time, keeping one in service whilst the other was updating.
 
 There is, however, still a risk of in-flight connections being dropped. This is because the containers running `service-b` are terminated as soon as the update begins, leaving the application unable to respond to in-flight requests.
 
@@ -357,7 +357,7 @@ Hello from Service B (Version 2.0.0) 👊
 Hello from Service B (Version 2.0.0) 👊
 ```
 
-We can use the [`terminationGracePeriodSeconds`](https://kubernetes.io/docs/user-guide/production-pods/#lifecycle-hooks-and-termination-notice) property to provide a _grace period_ during which the application can finish handling any open requests without taking on new ones. This is managed via the signals sent to the process running inside the containers (`SIGTERM` vs `SIGKILL`.)
+Luckily we can use the [`terminationGracePeriodSeconds`](https://kubernetes.io/docs/user-guide/production-pods/#lifecycle-hooks-and-termination-notice) property to provide a _grace period_ during which the application can finish handling any open requests without taking on new ones. This is managed via the signals sent to the process running inside the containers (`SIGTERM` vs `SIGKILL`.)
 
 > 🚧 The simple services in this project don't currently support a graceful shutdown when issued with a `SIGTERM` so for now we can't take advantage of `terminationGracePeriodSeconds`. Watch this space!
 
