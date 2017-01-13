@@ -12,6 +12,11 @@ _This is currently a work in progress. I'm using it to help me learn more about 
 * [Making changes](#making-changes)
   * [Scaling a service](#scaling-a-service)
   * [Deploying a new version of a service](#deploying-a-new-version-of-a-service)
+  * [Zero-downtime deployments](#zero-downtime-deployments)
+  * [Rolling back to a previous verson of a service](#rolling-back-to-a-previous-verison-of-a-service)
+* [Monitoring](#monitoring)
+  * [Accessing the logs for a service](#accessing-the-logs-for-a-service)
+* [Dashboard](#dashboard)
 * [Reading list](#reading-list)
 
 ## Overview
@@ -237,6 +242,26 @@ And the service should now return version `2.0.0` in its responses:
 curl $(minikube service service-a --url)
 # Hello from Service A (Version 2.0.0) 👋
 ```
+
+### Zero-downtime deployments
+
+### Rolling back a service
+
+## Monitoring
+
+### Accessing the logs for a service
+
+## Dashboard
+
+Throughout this guide we've been using the `kubectl` command line tool to manage our cluster. This, coupled with a [configuration driven approach](http://kubernetes.io/docs/user-guide/config-best-practices/), makes it easy make deployments, rollbacks and infrastructure changes reproducible and automated. It can still be useful to explore the cluster in a more visual way, which is where the Kubernetes [dashboard](https://kubernetes.io/docs/user-guide/ui/) comes in.
+
+The dashboard runs inside the Kubernetes cluster. To access the dashboard in a Minikube cluster, just run:
+
+```
+minikube dashboard
+```
+
+This will open the dashboard in a browser window. Here you'll see all of the services, deployments and pods that we have already created.
 
 ## Reading list
 
