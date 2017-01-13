@@ -159,7 +159,7 @@ kubectl get pods
 
 ### Deploying a new version of a service
 
-So far we've only used the `latest` tag when deploying the three services. This is works fine in development, but a better approach is to deploy _versioned_ images in production:
+So far we've only used the `latest` tag when deploying the three services. This works fine in development, but a better approach is to deploy _versioned_ images in production:
 
 > Note: you should avoid using :latest tag when deploying containers in production, because this makes it hard to track which version of the image is running and hard to roll back.
 
