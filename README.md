@@ -20,7 +20,7 @@ It demonstrates how to build minimal (_~5MB_) Docker images for each of them and
 
 ## Setup
 
-#### Building the service images
+### Building the service images
 
 > _This step is optional. You can use the pre-built images in the Docker Hub repositories_
 
@@ -36,7 +36,7 @@ To push the images to Docker Hub:
 make push
 ```
 
-#### Creating the services and deployments
+### Creating the services and deployments
 
 Each service has a Kubernetes [deployment](http://kubernetes.io/docs/user-guide/deployments) and [service](http://kubernetes.io/docs/user-guide/services) configured in the [`kubernetes.yaml`](kubernetes.yaml) file.
 
@@ -94,18 +94,38 @@ minikube service service-a --url
 # http://192.168.99.100:32363
 curl -i $(minikube service service-a --url)
 # HTTP/1.1 200 OK
-# Date: Fri, 06 Jan 2017 16:44:24 GMT
-# Content-Length: 25
+# Date: Fri, 13 Jan 2017 10:50:13 GMT
+# Content-Length: 41
 # Content-Type: text/plain; charset=utf-8
 #
-# Hello from Service A 👋
+# Hello from Service A (Version 2.0.0) 👋
 ```
 
-### Updating a deployment
+## Making changes
 
-We can update a deployment to run on more [replica](http://kubernetes.io/docs/user-guide/replicasets/) pods.
+When making changes to our deployed services we'll be following a consistent process:
+
+1. Make changes to the `kubernetes.yaml` confiuguration file
+2. Apply the changes to the cluster using [`kubectl apply`](http://kubernetes.io/docs/user-guide/kubectl/kubectl_apply/)
+
+Working in this way means we always have an accurate description of the cluster that can be checked in to version control for each rollbacks or even replicating new environments.
+
+### Scaling a service
+
+We can scale a deployment to run on more [replica](http://kubernetes.io/docs/user-guide/replicasets/) pods.
 
 Update the `replicas` property for the `service-a` deployment defined in `kubernetes.yaml` to be `3`.
+
+```yaml
+#...
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: service-a
+spec:
+  replicas: 3
+# ...
+```
 
 We can then apply this change to the cluster:
 
@@ -123,6 +143,85 @@ kubectl get pods
 # service-a-1760996314-sx4qj   1/1       Running             0          4s
 # service-b-2010885085-01fhw   1/1       Running             0          7m
 # service-c-2260773856-crl49   1/1       Running             0          7m
+```
+
+### Deploying a new version of a service
+
+So far we've only used the `latest` tag when deploying the three services. This is works fine in development, but a better approach is to deploy _versioned_ images in production:
+
+> Note: you should avoid using :latest tag when deploying containers in production, because this makes it hard to track which version of the image is running and hard to roll back.
+
+_Source: [Best Practices for Configuration](http://kubernetes.io/docs/user-guide/config-best-practices/)_
+
+Let's update our deployments to use versioned images. Update the `image` field for each deployment in [`kubernetes.yaml`](kubernetes.yaml) to use the `v1.0.0` tag:
+
+```
+# ...
+image: robinjmurphy/kubernetes-example-service-a:v1.0.0
+# ...
+image: robinjmurphy/kubernetes-example-service-b:v1.0.0
+# ...
+image: robinjmurphy/kubernetes-example-service-c:v1.0.0
+# ...
+```
+
+We can apply the change to the cluster:
+
+```bash
+kubectl apply -f kubernetes.yaml
+```
+
+We can then find the pod running `service-a` and check that the image has been updated:
+
+```
+kubectl describe pods -l app=service-a
+```
+
+The `-l` option lets us find the pods running `service-a` based on the `app` label.
+
+In the output you should see the line:
+
+```
+Image: robinjmurphy/kubernetes-example-service-a:v1.0.0
+```
+
+Calling the service should return the `v1.0.0` response:
+
+```bash
+curl $(minikube service service-a --url)
+# Hello from Service A (Version 1.0.0) 👋
+```
+
+Now that version `1.0.0` of each service is deployed, let's deploy a new version a new version of `service-a`. This is as simple as updating the image tags in the configuration file to point to a new version (`2.0.0`) and running `kubectl apply`.
+
+Let's first update the image in [kubernetes.yaml](kubernetes.yaml):
+
+```
+# ...
+image: robinjmurphy/kubernetes-example-service-a:v2.0.0
+# ...
+```
+
+And apply the change to the cluster:
+
+```bash
+kubectl apply -f kubernetes.yaml
+```
+
+We can now check that the correct image is being used by the pod running `service-a`:
+
+```bash
+kubectl describe pods -l app=service-a
+# ...
+# Image: robinjmurphy/kubernetes-example-service-a:v2.0.0
+# ...
+```
+
+And the service should now return version `2.0.0` in its responses:
+
+```bash
+curl $(minikube service service-a --url)
+# Hello from Service A (Version 2.0.0) 👋
 ```
 
 ## Reading list
