@@ -198,7 +198,7 @@ Now that version `1.0.0` of each service is deployed, let's deploy a new version
 
 Let's first update the `image` field in [kubernetes.yaml](kubernetes.yaml):
 
-```
+```yaml
 # ...
 image: robinjmurphy/kubernetes-example-service-a:v2.0.0
 # ...
