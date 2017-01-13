@@ -253,7 +253,7 @@ curl $(minikube service service-a --url)
 
 ## Dashboard
 
-Throughout this guide we've been using the `kubectl` command line tool to manage our cluster. This, coupled with a [configuration driven approach](http://kubernetes.io/docs/user-guide/config-best-practices/), makes it easy make deployments, rollbacks and infrastructure changes reproducible and automated. It can still be useful to explore the cluster in a more visual way, which is where the Kubernetes [dashboard](https://kubernetes.io/docs/user-guide/ui/) comes in.
+Throughout this guide we've been using the `kubectl` command line tool to manage our cluster. This, coupled with a [configuration-driven approach](http://kubernetes.io/docs/user-guide/config-best-practices/), makes it easy make deployments, rollbacks and infrastructure changes reproducible and automated. It can, however, still be useful to explore the cluster in a more visual way, which is where the Kubernetes [dashboard](https://kubernetes.io/docs/user-guide/ui/) comes in.
 
 The dashboard runs inside the Kubernetes cluster. To access the dashboard in a Minikube cluster, just run:
 
@@ -261,7 +261,7 @@ The dashboard runs inside the Kubernetes cluster. To access the dashboard in a M
 minikube dashboard
 ```
 
-This will open the dashboard in a browser window. Here you'll see all of the services, deployments and pods that we have already created.
+This will open the dashboard in a browser window. Here you'll see all of the services, deployments and pods that we have already created from our configuration file using `kubectl`.
 
 ## Reading list
 
